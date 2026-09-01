@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed .
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build web --release
+
+  release-android:
+    # Signed AAB on version tags (e.g. v1.2.0). Requires these repo secrets:
+    #   ANDROID_KEYSTORE_BASE64  = base64 of your .key/upload-keystore.jks
+    #   ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_PASSWORD
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: analyze-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - name: Restore keystore from secret
+        run: |
+          mkdir -p .key
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > .key/upload-keystore.jks
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      - name: Build signed AAB -> publish/android/
+        run: bash scripts/build-android.sh upload "${{ github.ref_name }}"
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Attach AAB to the GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: publish/android/*.aab

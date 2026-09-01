@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-type-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      # Downloads the latest stable CPython that satisfies the project (falls back to a cached build).
+      - name: Install Python via uv
+        run: uv python install
+      - run: uv sync
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy src
+      - run: uv run pytest
+
+  release:
+    # Runs only on version tags (e.g. v1.2.0)
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: lint-type-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv python install
+      - run: uv sync
+      - run: uv add --dev pyinstaller
+      - name: Build standalone binary -> publish/
+        run: bash scripts/publish.sh
+        env:
+          VERSION: ${{ github.ref_name }}
+      - name: Attach zips to the GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: publish/*.zip

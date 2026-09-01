@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "restore",
+      "type": "shell",
+      "command": "dotnet restore",
+      "problemMatcher": []
+    },
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "dotnet build",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "dotnet test",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "run",
+      "type": "shell",
+      "command": "dotnet run --project src/App",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "publish (all desktop platforms)",
+      "detail": "Self-contained single-file builds -> publish/<rid>/ + zips",
+      "type": "shell",
+      "windows": { "command": "powershell -ExecutionPolicy Bypass -File scripts/publish.ps1" },
+      "linux": { "command": "bash scripts/publish.sh" },
+      "osx": { "command": "bash scripts/publish.sh" },
+      "problemMatcher": []
+    },
+    {
+      "label": "publish android (signed aab)",
+      "detail": "MAUI: signed AAB -> publish/android/ (reads keystore passwords from env vars)",
+      "type": "shell",
+      "windows": { "command": "powershell -ExecutionPolicy Bypass -File scripts/build-android.ps1" },
+      "linux": { "command": "bash scripts/build-android.sh" },
+      "osx": { "command": "bash scripts/build-android.sh" },
+      "problemMatcher": []
+    }
+  ]
+}

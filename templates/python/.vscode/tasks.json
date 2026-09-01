@@ -1,0 +1,53 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "sync",
+      "detail": "Create venv + install deps from lockfile",
+      "type": "shell",
+      "command": "uv sync",
+      "problemMatcher": []
+    },
+    {
+      "label": "lint",
+      "type": "shell",
+      "command": "uv run ruff check .",
+      "problemMatcher": []
+    },
+    {
+      "label": "format",
+      "type": "shell",
+      "command": "uv run ruff format .",
+      "problemMatcher": []
+    },
+    {
+      "label": "typecheck",
+      "type": "shell",
+      "command": "uv run mypy src",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "uv run pytest",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "run",
+      "type": "shell",
+      "command": "uv run python -m __project__",
+      "problemMatcher": []
+    },
+    {
+      "label": "publish (standalone binary)",
+      "detail": "PyInstaller build -> publish/<platform>/ + zip",
+      "type": "shell",
+      "windows": { "command": "powershell -ExecutionPolicy Bypass -File scripts/publish.ps1" },
+      "linux": { "command": "bash scripts/publish.sh" },
+      "osx": { "command": "bash scripts/publish.sh" },
+      "problemMatcher": []
+    }
+  ]
+}

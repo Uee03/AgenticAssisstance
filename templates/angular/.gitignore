@@ -1,0 +1,33 @@
+## Dependencies / build
+node_modules/
+dist/
+.angular/
+tmp/
+out-tsc/
+
+## Local release builds — never commit
+publish/
+
+## Signing / secrets (kept for parity across bundles)
+.key/*
+!.key/README.md
+.env
+*.env.local
+
+## Test / coverage
+coverage/
+
+## IDE
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+
+## Logs
+npm-debug.log*
+yarn-error.log*
+
+## OS
+.DS_Store
+Thumbs.db

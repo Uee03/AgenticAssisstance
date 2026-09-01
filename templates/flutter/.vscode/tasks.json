@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "flutter upgrade",
+      "detail": "Update the SDK to the latest stable (run before scaffolding)",
+      "type": "shell",
+      "command": "flutter upgrade",
+      "problemMatcher": []
+    },
+    {
+      "label": "pub get",
+      "type": "shell",
+      "command": "flutter pub get",
+      "problemMatcher": []
+    },
+    {
+      "label": "analyze",
+      "type": "shell",
+      "command": "flutter analyze",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "flutter test",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "run",
+      "type": "shell",
+      "command": "flutter run",
+      "problemMatcher": []
+    },
+    {
+      "label": "build apk (release)",
+      "type": "shell",
+      "command": "flutter build apk --release",
+      "problemMatcher": []
+    },
+    {
+      "label": "build android (signed aab)",
+      "detail": "Signed .aab -> publish/android/ (reads keystore passwords from env vars)",
+      "type": "shell",
+      "windows": { "command": "powershell -ExecutionPolicy Bypass -File scripts/build-android.ps1" },
+      "linux": { "command": "bash scripts/build-android.sh" },
+      "osx": { "command": "bash scripts/build-android.sh" },
+      "problemMatcher": []
+    },
+    {
+      "label": "publish (web/desktop)",
+      "detail": "Build a target and zip it into publish/<target>/",
+      "type": "shell",
+      "windows": { "command": "powershell -ExecutionPolicy Bypass -File scripts/publish.ps1" },
+      "linux": { "command": "bash scripts/publish.sh" },
+      "osx": { "command": "bash scripts/publish.sh" },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+name: CI
+
+# Overlay bundle: validate Supabase migrations by applying them to a fresh local stack.
+# When merged into a backend/frontend repo, fold this into that repo's CI.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Start Supabase and apply migrations
+        run: |
+          if [ -d supabase ]; then
+            supabase start
+            supabase db lint || true
+            supabase db reset --debug
+            supabase stop
+          else
+            echo "No supabase/ directory. Run 'supabase init' and add migrations first."
+          fi

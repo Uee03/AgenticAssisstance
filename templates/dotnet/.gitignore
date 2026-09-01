@@ -1,0 +1,56 @@
+## Build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+## IDE
+.vs/
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.user
+*.suo
+.idea/
+
+## Local release builds — never commit
+publish/
+
+## Signing keys — never commit (folder note is kept)
+.key/*
+!.key/README.md
+*.keystore
+*.jks
+**/key.properties
+
+## Android / MAUI artifacts
+*.aab
+*.apk
+*.aar
+
+## Secrets / env
+.env
+*.env.local
+appsettings.*.local.json
+
+## Local SQLite database files (remove entries to version a seed/fixture DB)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+## Test / coverage
+[Tt]est[Rr]esult*/
+coverage*/
+*.trx
+*.coverage
+
+## OS
+.DS_Store
+Thumbs.db

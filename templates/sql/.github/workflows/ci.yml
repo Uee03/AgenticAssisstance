@@ -1,0 +1,50 @@
+name: CI
+
+# Overlay bundle: lint SQL and (optionally) apply migrations against a throwaway Postgres.
+# When merged into a backend repo, fold these jobs into that repo's own CI instead of running twice.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-sql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint *.sql with sqlfluff (advisory)
+        run: |
+          if git ls-files '*.sql' | grep -q .; then
+            pipx install sqlfluff
+            # Set --dialect to tsql if this project targets SQL Server.
+            sqlfluff lint --dialect postgres $(git ls-files '*.sql') || true
+          else
+            echo "No .sql files to lint."
+          fi
+
+  migrations-postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: app
+          POSTGRES_DB: app
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U app"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply SQL migrations if present
+        env:
+          PGPASSWORD: app
+        run: |
+          files=$(git ls-files '*migrations*.sql' | sort)
+          if [ -n "$files" ]; then
+            for f in $files; do echo "Applying $f"; psql -h localhost -U app -d app -f "$f"; done
+          else
+            echo "No SQL migration files found; skipping (tool-managed migrations run in the backend's CI)."
+          fi

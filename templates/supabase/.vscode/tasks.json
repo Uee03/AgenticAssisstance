@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "supabase start",
+      "detail": "Start the local Supabase stack (Docker)",
+      "type": "shell",
+      "command": "supabase start",
+      "problemMatcher": []
+    },
+    {
+      "label": "supabase stop",
+      "type": "shell",
+      "command": "supabase stop",
+      "problemMatcher": []
+    },
+    {
+      "label": "migration new",
+      "detail": "Create a new migration file (prompts for a name)",
+      "type": "shell",
+      "command": "supabase migration new ${input:migrationName}",
+      "problemMatcher": []
+    },
+    {
+      "label": "db reset (local)",
+      "detail": "Re-apply all migrations to the local DB",
+      "type": "shell",
+      "command": "supabase db reset",
+      "problemMatcher": []
+    },
+    {
+      "label": "db push (remote)",
+      "detail": "Apply migrations to the linked remote project",
+      "type": "shell",
+      "command": "supabase db push",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "migrationName",
+      "type": "promptString",
+      "description": "Migration name (snake_case)"
+    }
+  ]
+}

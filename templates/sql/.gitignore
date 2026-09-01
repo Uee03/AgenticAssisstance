@@ -1,0 +1,22 @@
+## Secrets / env
+.env
+*.env.local
+
+## Local DB data (if mounted locally)
+.data/
+pgdata/
+mssqldata/
+
+## Signing / keys (parity across bundles)
+.key/*
+!.key/README.md
+
+## IDE
+.vscode/*
+!.vscode/tasks.json
+!.vscode/extensions.json
+.idea/
+
+## OS
+.DS_Store
+Thumbs.db

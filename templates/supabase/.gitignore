@@ -1,0 +1,21 @@
+## Secrets / env — never commit
+.env
+*.env.local
+
+## Supabase CLI local state
+supabase/.temp/
+supabase/.branches/
+
+## Signing / keys (parity across bundles)
+.key/*
+!.key/README.md
+
+## IDE
+.vscode/*
+!.vscode/tasks.json
+!.vscode/extensions.json
+.idea/
+
+## OS
+.DS_Store
+Thumbs.db

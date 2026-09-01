@@ -1,0 +1,7 @@
+# Copy to android/key.properties (git-ignored) — the build-android script generates this for you.
+# Passwords should come from env vars / CI secrets, not be committed here.
+storePassword=CHANGEME
+keyPassword=CHANGEME
+keyAlias=upload
+# Absolute path to the keystore is recommended (the script fills this in automatically):
+storeFile=/absolute/path/to/.key/upload-keystore.jks
