@@ -1,6 +1,6 @@
 ---
 name: scaffolding-dotnet-api
-description: 'Scaffolds a .NET REST/JSON Web API or SaaS backend with clean architecture, PostgreSQL, validation, auth, and OpenAPI. Use when building a .NET Web API, HTTP service, microservice, or backend, or when the user mentions ASP.NET API, minimal APIs, controllers, endpoints, or REST service in .NET.'
+description: 'Scaffolds a .NET REST/JSON Web API or SaaS backend with clean architecture, PostgreSQL, validation, auth, and OpenAPI. Use when building a .NET Web API, HTTP service, microservice, or backend, or when the user mentions ASP.NET API, controllers, FastEndpoints, endpoints, or REST service in .NET.'
 ---
 
 # Scaffolding a .NET Web API
@@ -10,8 +10,17 @@ Builds a `Microsoft.NET.Sdk.Web`, `net10.0` backend. First load
 
 ## Ask the user first (do not assume)
 
-1. **API style:** MVC controllers · Minimal APIs (`MapGroup` per feature) · FastEndpoints (one class
-   per endpoint). Whichever is chosen, endpoints stay thin and delegate to Application use cases.
+1. **API style:** Controllers or FastEndpoints. Do not scaffold before the user chooses.
+   - **Controllers:** attribute-routed `ControllerBase` classes, small and cohesive. Prefer for an
+     existing MVC/controller estate, teams using MVC action filters or data annotations, or when an
+     external endpoint framework is undesirable.
+   - **FastEndpoints:** one REPR endpoint class per operation, co-located with its request, response,
+     and validator. Prefer for a greenfield API expected to grow and a team that wants enforced
+     feature-slice structure. Add `FastEndpoints`, `builder.Services.AddFastEndpoints()`, and
+     `app.UseFastEndpoints()`. Use FluentValidation; FastEndpoints does not use Data Annotations
+     validation.
+   - In either style, endpoints stay thin, use constructor-injected Application use cases, and expose
+     Contracts DTOs rather than Domain entities. Do not mix styles in a new API.
 2. **API doc UI:** Swagger / Swashbuckle · Scalar. Either way, generate an OpenAPI document.
 3. **Database:** SQLite (quick win / local / small) · PostgreSQL (default for services) · SQL Server ·
    Supabase. If unsure, load the `sql` bundle's `database-selection` skill and ask before adding persistence.
@@ -34,8 +43,11 @@ Builds a `Microsoft.NET.Sdk.Web`, `net10.0` backend. First load
 - Application layer organized **by feature / vertical slice**:
   `Application/Features/<Feature>/{Create,Update,Delete,Get,Search}` with shared bits under
   `Application/Common/{Interfaces,Behaviors,Exceptions,Extensions}`.
-- **CQRS-lite:** Command (state-changing) and Query (read) objects. A mediator library is optional —
-  direct handler invocation is fine when clearer.
+- **CQRS (pattern, not a library):** separate Command (state-changing) and Query (read) objects with
+  your own `ICommand`/`IQuery` + handler interfaces and decorators — **do not add MediatR**. Inject the
+  specific handler into the endpoint and call it directly. Use CQRS where the domain warrants it; for a
+  simple CRUD domain a plain data-access layer is better. See the
+  [dotnet-cqrs](../dotnet-cqrs/SKILL.md) skill for the abstractions, decorators, and DI wiring.
 - Value objects (`Money`, `Address`) in `Domain/ValueObjects` — don't wrap every primitive.
 
 ## Validation (layered)
@@ -44,10 +56,21 @@ Builds a `Microsoft.NET.Sdk.Web`, `net10.0` backend. First load
 - **Business** — Application/Domain (entity exists, tenant ownership, state allows the operation).
 - **Database** — constraints (PK/FK/unique/not-null/indexes).
 
+## Request handling (both API styles)
+
+- Accept and propagate `CancellationToken`; keep data access and external I/O asynchronous. Never use
+  `.Result`, `.Wait()`, or `Task.Run` to make ordinary request work appear asynchronous.
+- Page and project collection queries; avoid buffering unbounded collections or large bodies. Use
+  `IHttpClientFactory` for outbound HTTP clients.
+- `HttpContext` is request-scoped and not thread-safe: do not capture it or scoped services for
+  background work. Use a hosted service and create a fresh DI scope for long-running work.
+
 ## Data access
 
 - **PostgreSQL** (recommended default) via **Npgsql**. Prefer **Dapper** for read-heavy/SQL work;
-  **EF Core** for simple CRUD/migrations/change tracking. Both may coexist. **Always parameterize SQL.**
+  **EF Core** for simple CRUD/migrations/change tracking. Both may coexist. **Always parameterize SQL**
+  (never string-build from input) — see the `sql` bundle's `efcore-data-access` skill for EF Core
+  code-first, EF raw SQL, and Dapper/ADO.NET parameterization patterns.
 - **SQLite** — only for a local/prototype quick start: EF Core `Microsoft.EntityFrameworkCore.Sqlite`;
   swap to Postgres later behind the repository interface. See the `sql` bundle's `sqlite-conventions`.
 - Serialize **enums as strings** in responses (`"status": "Paid"`, not `2`). Consider **Supabase** for
@@ -93,4 +116,5 @@ docs / OpenAPI annotations) and in the living docs, and **export the OpenAPI spe
 ## Docs
 
 `README.md` covers run/config/DB setup. `AGENTS.md` records the chosen API style, doc UI, and layer
-rules; keep endpoint docs + OpenAPI spec updated as endpoints change.
+rules; keep endpoint docs + OpenAPI spec updated as endpoints change. For FastEndpoints, document
+the REPR/feature-slice convention and the `AddFastEndpoints`/`UseFastEndpoints` pipeline setup.

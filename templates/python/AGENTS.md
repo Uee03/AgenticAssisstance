@@ -3,6 +3,13 @@
 Guidance for AI agents working in this repository. Read this first, then load the skill that matches
 the task. Keep this file current as the project evolves.
 
+> [!IMPORTANT]
+> **STOP — mandatory project intake.** On any request to create, scaffold, or set up a project (or
+> when this repo is empty/near-empty), first complete
+> [project-intake](./.github/skills/project-intake/SKILL.md) and get the user's explicit confirmation
+> **before** creating or modifying any file, generating code, or running commands. Do not assume
+> defaults. If the intake is unanswered, ask the questions — do not build.
+
 ## Tech baseline
 
 - **Python:** **latest stable**. Fetch it with `uv python install` (downloads the newest CPython from
@@ -19,6 +26,7 @@ Skills live in `.github/skills/`. Load a skill when its trigger matches; follow 
 
 | Skill | Use when |
 |-------|----------|
+| [project-intake](./.github/skills/project-intake/SKILL.md) | **Always first** on a new/empty project — collect requirements + get confirmation before scaffolding |
 | [python-clean-architecture](./.github/skills/python-clean-architecture/SKILL.md) | Designing layers/packages, DI, or deciding where code belongs (every app type) |
 | [scaffolding-python-api](./.github/skills/scaffolding-python-api/SKILL.md) | Building a JSON **API** / backend (FastAPI preferred) |
 | [scaffolding-python-webapp](./.github/skills/scaffolding-python-webapp/SKILL.md) | Building a server-rendered **web app** (Django / Flask + templates) |

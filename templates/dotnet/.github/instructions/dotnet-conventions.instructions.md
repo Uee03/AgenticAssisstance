@@ -17,7 +17,16 @@ applyTo: '**/*.cs'
 - Prefer `IReadOnlyList<T>` / `IReadOnlyDictionary<T>` on public APIs over mutable collections.
 - **Prefer composition over inheritance.** No empty marker base classes; use small interfaces where
   they add value.
+- **Services go behind an interface.** Any injected service that has behavior or crosses a boundary
+  (data access, external APIs, email/storage, domain/application services) is defined as `IFooService`
+  + `FooService` and registered by its interface. This keeps them mockable in tests and swappable
+  (Strategy/Factory). Don't wrap DTOs, records, value objects, `IOptions<T>` config, or ViewModels in
+  interfaces just to have one.
 - **Prefer explicit/manual mapping** (extension methods or constructors) over AutoMapper/Mapster.
+- **CQRS is a pattern, not a library.** Where CQRS applies, use your own `ICommand`/`IQuery` + handler
+  interfaces and decorators; **do not add MediatR** to a new project. Inject the specific handler and
+  call it directly — no `ISender`/mediator. Keep queries free of domain logic; don't apply CQRS to a
+  simple CRUD domain.
 - **Constructor injection only** — no service locator, no `new`-ing injectable dependencies.
 - LINQ only where it improves clarity; prefer explicit `foreach` for hot paths / simple loops.
 - No `Console.WriteLine` for diagnostics in library code — use `Microsoft.Extensions.Logging`.

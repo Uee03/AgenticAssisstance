@@ -1,0 +1,3 @@
+# One-off BAU scripts waiting to run live here.
+# Named: yyyyMMdd-<ticket>-<what-it-is-for>.sql
+# Local runs archive to ../Executed/ ; CI journals them in app.bau_script_log.

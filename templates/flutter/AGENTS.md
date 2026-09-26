@@ -3,6 +3,13 @@
 Guidance for AI agents working in this Flutter repository. Read this first, then load the skill that
 matches the task. Keep this file current as the project evolves.
 
+> [!IMPORTANT]
+> **STOP — mandatory project intake.** On any request to create, scaffold, or set up a project (or
+> when this repo is empty/near-empty), first complete
+> [project-intake](./.github/skills/project-intake/SKILL.md) and get the user's explicit confirmation
+> **before** creating or modifying any file, generating code, or running commands. Do not assume
+> defaults. If the intake is unanswered, ask the questions — do not build.
+
 ## Tech baseline
 
 - **Flutter:** latest stable. **Before scaffolding, run `flutter upgrade`** so the SDK and templates
@@ -16,6 +23,7 @@ Skills live in `.github/skills/`. Load a skill when its trigger matches; follow 
 
 | Skill | Use when |
 |-------|----------|
+| [project-intake](./.github/skills/project-intake/SKILL.md) | **Always first** on a new/empty project — collect requirements + get confirmation before scaffolding |
 | [flutter-app-architecture](./.github/skills/flutter-app-architecture/SKILL.md) | Designing layers/features, MVVM, deciding where code belongs |
 | [scaffolding-flutter-app](./.github/skills/scaffolding-flutter-app/SKILL.md) | Creating a new Flutter app or adding a feature |
 | [flutter-state-and-packages](./.github/skills/flutter-state-and-packages/SKILL.md) | Choosing state management, routing, DI, and vetted packages |

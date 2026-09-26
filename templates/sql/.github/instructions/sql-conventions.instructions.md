@@ -6,6 +6,9 @@ applyTo: '**/*.sql'
 # SQL Conventions
 
 - **Parameterize** all queries that take input (`$1`/`@param`) — never concatenate/interpolate untrusted values.
+- **Injection is the top risk:** the same rule binds application data-access code — EF Core raw SQL
+  (`FromSql*`/`ExecuteSql*`/`SqlQuery*`), Dapper, and ADO.NET must use bound parameters, never string
+  building; dynamic table/column names come from a code allow-list. See the `efcore-data-access` skill.
 - No `SELECT *` in application queries — list columns explicitly.
 - Every table: explicit **primary key**; **foreign keys** with intentional `ON DELETE`/`ON UPDATE`;
   `NOT NULL` by default; unique constraints for natural keys; `CHECK` for invariants.

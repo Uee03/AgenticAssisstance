@@ -16,6 +16,7 @@
 Project name : <MyProject>
 UI target    : <CLI | WinForms | Avalonia | QT6 | ASP.NET>
 .NET version : .NET 10 (net10.0)  ← default unless told otherwise
+API style    : <Controllers | FastEndpoints>  ← required when UI target is ASP.NET
 Extras       : <optional: features, APIs, DB, auth, etc.>
 ```
 
@@ -67,6 +68,13 @@ tests/
   makes sense) — **use DI where it is required/adds value**, not dogmatically for trivial value types
   or one-off helpers.
 - Register services in a single composition root (e.g. `ServiceCollectionExtensions.AddAppServices()`).
+- **Define services behind an interface.** Every injected service that has behavior or crosses a
+  boundary (data access, external APIs, email/storage, domain/application services) gets an
+  `IFooService` abstraction plus its `FooService` implementation, registered by the interface
+  (`services.AddScoped<IFooService, FooService>()`); consumers depend on `IFooService`. This keeps
+  services mockable in unit tests and swappable for **Strategy**/**Factory** patterns. Don't add
+  interfaces for DTOs, records, value objects, `IOptions<T>` config, or ViewModels — they hold data,
+  not behavior.
 - Constructor injection only; no service locator, no `new`-ing dependencies inside classes.
 - Prefer scoped/transient lifetimes for stateful services, singletons for stateless/shared ones.
 
@@ -75,7 +83,9 @@ tests/
 - **Factory** / **Abstract Factory** for provider/strategy creation.
 - **Strategy** for interchangeable algorithms/providers.
 - **Options pattern** (`IOptions<T>`) for configuration.
-- **Mediator / Command** only if the app is large enough to warrant it.
+- **CQRS** (separate Command/Query models) only if the app is large enough to warrant it. CQRS is a
+  **pattern, not a library** — use your own `ICommand`/`IQuery` + handler interfaces and decorators,
+  **not MediatR**. Keep plain CRUD for simple domains.
 - **MVVM** for Avalonia/WinForms; **MVC/Presenter** style for CLI/QT6 where appropriate.
 
 ### 1.6 Coding conventions
@@ -322,10 +332,18 @@ Dependency direction: `Api → Application → Domain`, `Api → Contracts`; `In
 Npgsql, Redis, HTTP). **Contracts never reference Domain** — keeps API model decoupled from internals.
 
 - **API style — ASK FIRST, pick one:**
-  - **MVC controllers** — conventional, attribute-routed controllers.
-  - **Minimal APIs** — endpoint delegates grouped by feature (`MapGroup`).
-  - **FastEndpoints** — REPR-pattern endpoint classes (one class per endpoint).
-  - Whichever is chosen: **endpoints stay thin** and delegate to Application use cases via DI.
+  - **Controllers** — conventional, attribute-routed `ControllerBase` classes. Choose this for an
+    existing controller-based codebase, a team that relies on MVC conventions/action filters or data
+    annotations, or when avoiding an external endpoint framework is important. Keep controllers
+    small and cohesive; split by feature before they become multi-action dependency magnets.
+  - **FastEndpoints** — REPR-pattern endpoint classes, one HTTP operation per class. Choose this for
+    a greenfield API expected to grow, where feature-local request/response/validator/endpoint files
+    and FluentValidation conventions are welcome. Add the `FastEndpoints` package, call
+    `AddFastEndpoints()` during service registration, and call `UseFastEndpoints()` in the pipeline.
+    Do not use Data Annotations validation; keep input validation in FluentValidation validators.
+  - **Whichever is chosen:** endpoints stay thin, use constructor-injected Application use cases, and
+    do not expose Domain entities as API contracts. Do not mix styles within a new API unless an
+    incremental migration requires it and the boundary is documented.
 - **API documentation UI — ASK FIRST, pick one:** **Swagger / Swashbuckle** or **Scalar**. Either
   way, generate an **OpenAPI document** so third parties can consume/import the API.
 
@@ -338,14 +356,25 @@ Npgsql, Redis, HTTP). **Contracts never reference Domain** — keeps API model d
 - Organize the Application layer **by feature / vertical slice**, not by technical folders:
   `Application/Features/<Feature>/{Create,Update,Delete,Get,Search}` with shared bits under
   `Application/Common/{Interfaces,Behaviors,Exceptions,Extensions}`.
-- **CQRS-lite:** use Command (state-changing) and Query (read) objects. A mediator library is
-  **optional** — direct handler invocation is fine when clearer.
+- **CQRS (pattern, not a library):** use Command (state-changing) and Query (read) objects with your
+  own `ICommand`/`IQuery` + handler interfaces and decorators; inject the handler into the endpoint and
+  call it directly. **Do not add MediatR** to a new project. Apply CQRS where the domain warrants it —
+  keep plain CRUD for simple domains.
 
 **Validation strategy (layered):**
 - **Input** — `FluentValidation` (required fields, lengths, formats, ranges, collections). Do NOT put
   core business rules here.
 - **Business** — Application/Domain (entity exists, belongs to tenant, state allows the operation).
 - **Database** — constraints (PK/FK/unique/not-null/indexes).
+
+**Request handling & performance (both styles):**
+- Pass `CancellationToken` through endpoint/controller, Application, and data-access calls. Keep I/O
+  asynchronous; never block on `Task.Result`/`Wait()` or wrap ordinary request work in `Task.Run`.
+- Page and project collection queries; do not load unbounded result sets or large request/response
+  bodies into memory. Use `IHttpClientFactory` for outbound HTTP.
+- Treat `HttpContext` as request-scoped and non-thread-safe: never retain it in fields, use it after
+  a request completes, or access it concurrently. Run long work in a hosted/background service with
+  a new DI scope rather than retaining request services.
 
 **Data access:**
 - **PostgreSQL** via **Npgsql**. Prefer **Dapper** for read-heavy/SQL-intensive work; use **EF Core**
@@ -413,8 +442,8 @@ When you give me the filled-in template from Section 0, I will:
 - [ ] Add a starter xUnit test project with one passing test.
 - [ ] Add a git-ignored **`publish/`** folder + a **publish script** producing zipped, per-platform
       (self-contained where possible) builds.
-- [ ] For ASP.NET: confirm API style (MVC/Minimal/FastEndpoints) + doc UI (Swagger/Scalar) first,
-      then document all endpoints + export the OpenAPI spec.
+- [ ] For ASP.NET: ask the user to choose Controllers or FastEndpoints, then confirm the doc UI
+  (Swagger/Scalar) before implementation; document all endpoints + export the OpenAPI spec.
 - [ ] Generate **`README.md`**, **`AGENTS.md`**, and living software documentation.
 - [ ] Verify it builds (`dotnet build`) and runs.
 

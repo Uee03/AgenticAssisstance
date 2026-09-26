@@ -30,6 +30,24 @@
       "type": "shell",
       "command": "docker compose exec mssql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -No",
       "problemMatcher": []
+    },
+    {
+      "label": "db apply (local docker)",
+      "type": "shell",
+      "command": "bash",
+      "args": ["scripts/apply.sh"],
+      "windows": { "command": "pwsh", "args": ["-File", "scripts/apply.ps1"] },
+      "options": { "cwd": "${workspaceFolder}/database" },
+      "problemMatcher": []
+    },
+    {
+      "label": "db apply (object scripts only)",
+      "type": "shell",
+      "command": "bash",
+      "args": ["scripts/apply.sh", "--skip-bau"],
+      "windows": { "command": "pwsh", "args": ["-File", "scripts/apply.ps1", "-SkipBau"] },
+      "options": { "cwd": "${workspaceFolder}/database" },
+      "problemMatcher": []
     }
   ]
 }

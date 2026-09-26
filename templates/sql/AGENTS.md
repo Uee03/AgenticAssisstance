@@ -25,6 +25,8 @@ same schema. The conventions skills below cover each.
 | [postgres-conventions](./.github/skills/postgres-conventions/SKILL.md) | Writing PostgreSQL DDL/SQL, choosing PG types/features |
 | [sqlserver-conventions](./.github/skills/sqlserver-conventions/SKILL.md) | Writing SQL Server (T-SQL) DDL/SQL, choosing MSSQL types/features |
 | [sql-migrations](./.github/skills/sql-migrations/SKILL.md) | Creating/versioning migrations, evolving a schema safely |
+| [postgres-sql-deployment](./.github/skills/postgres-sql-deployment/SKILL.md) | SQL-first Postgres deploy: idempotent object scripts + one-off BAU scripts, the `apply` runner, and CI to UAT/Prod |
+| [efcore-data-access](./.github/skills/efcore-data-access/SKILL.md) | Accessing SQL from .NET: EF Core (code-first + LINQ), EF Core raw SQL, and standard Dapper/ADO.NET — always parameterized |
 
 ## Agents
 
@@ -47,9 +49,22 @@ docker compose down
 CI: `.github/workflows/ci.yml` lints SQL and can apply migrations to a throwaway Postgres. When you
 merge this overlay into a backend, fold its CI into that repo's workflow.
 
+## SQL-first deployment (object + BAU scripts)
+
+For a plain-`.sql` Postgres project without an ORM migration tool, the [`database/`](./database)
+folder is a self-contained scaffold: idempotent **object scripts** (`Tables` / `Functions` /
+`StoredProcedures`) plus one-off **BAU** data scripts, applied in a fixed order by
+`scripts/apply.sh` (`apply.ps1` on Windows) and shipped to UAT/Production by
+`.github/workflows/db-deploy.yml`. Load
+[postgres-sql-deployment](./.github/skills/postgres-sql-deployment/SKILL.md) before writing scripts
+or wiring the pipeline. This is an alternative to tool-managed `sql-migrations` — pick one per project.
+
 ## Always do
 
-- **Parameterize every query** — never concatenate/interpolate untrusted input into SQL.
+- **Parameterize every query** — never concatenate/interpolate untrusted input into SQL. This is
+  non-negotiable (OWASP A03 injection) and applies equally to EF Core raw SQL (`FromSql*`,
+  `ExecuteSql*`, `SqlQuery*`), Dapper, and ADO.NET. Dynamic identifiers come from a code allow-list,
+  never from input. See [efcore-data-access](./.github/skills/efcore-data-access/SKILL.md).
 - All schema changes go through **versioned, forward-only migrations** (never hand-edit prod).
 - Explicit primary keys; foreign keys with intentional `ON DELETE`/`ON UPDATE`; `NOT NULL` by default.
 - Index foreign keys and common query predicates; add unique constraints for natural keys.

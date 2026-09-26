@@ -54,6 +54,12 @@ Dependency direction: `Api → Application → Domain`, `Api → Contracts`; `In
 
 - `Microsoft.Extensions.DependencyInjection` (via `Microsoft.Extensions.Hosting` where a host fits).
 - Register in one composition root, e.g. `ServiceCollectionExtensions.AddAppServices()`.
+- **Define services behind an interface.** Every injected service with behavior or that crosses a
+  boundary gets an `IFooService` abstraction and its `FooService` implementation, registered by the
+  interface (`services.AddScoped<IFooService, FooService>()`). Consumers depend on `IFooService`, not
+  the concrete type. This makes services mockable in unit tests (NSubstitute/Moq) and lets you swap
+  implementations for **Strategy**/**Factory** without touching callers. Skip interfaces for DTOs,
+  records, value objects, `IOptions<T>` config, and ViewModels — they carry data, not behavior.
 - **Constructor injection only.** No service locator, no `new`-ing dependencies inside classes.
 - Scoped/transient for stateful services; singletons for stateless/shared ones. Use DI where it adds
   value — not for trivial value types or one-off helpers.
@@ -61,7 +67,9 @@ Dependency direction: `Api → Application → Domain`, `Api → Contracts`; `In
 ## Patterns (use where they genuinely help)
 
 Repository (data access) · Factory/Abstract Factory (provider creation) · Strategy (interchangeable
-algorithms) · Options (`IOptions<T>` config) · Mediator/CQRS only when the app is large enough.
+algorithms) · Options (`IOptions<T>` config) · **CQRS** (separate Command/Query models) when the app is
+large enough. CQRS is a **pattern, not a library** — use your own `ICommand`/`IQuery` + handler
+interfaces and decorators, **not MediatR**. See the [dotnet-cqrs](../dotnet-cqrs/SKILL.md) skill.
 
 ## Where code goes — quick decisions
 

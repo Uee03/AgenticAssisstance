@@ -12,10 +12,17 @@ this first, then load the skill that matches the task.
   the security boundary — do not rely on client checks alone.
 - Secrets (`service_role`, DB password, JWT secret) come from env / a secrets manager — never committed.
 
+> [!IMPORTANT]
+> **STOP — mandatory project intake.** On any request to add or set up Supabase, first complete
+> [project-intake](./.github/skills/project-intake/SKILL.md) and get the user's explicit confirmation
+> **before** creating or modifying any file, running migrations, adding keys, or running commands. Do
+> not assume defaults — getting keys or RLS wrong is a security problem.
+
 ## Skills — load the one that matches the task
 
 | Skill | Use when |
 |-------|----------|
+| [project-intake](./.github/skills/project-intake/SKILL.md) | **Always first** on a new integration — confirm stack, keys, RLS tenancy before wiring anything |
 | [supabase-setup](./.github/skills/supabase-setup/SKILL.md) | Initializing Supabase, local dev (CLI), linking, migrations, keys/env |
 | [supabase-auth](./.github/skills/supabase-auth/SKILL.md) | Adding authentication, sessions, providers, server vs client keys |
 | [supabase-database-and-rls](./.github/skills/supabase-database-and-rls/SKILL.md) | Designing tables + writing/reviewing RLS policies |

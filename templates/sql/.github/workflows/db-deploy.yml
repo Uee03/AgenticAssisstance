@@ -1,0 +1,47 @@
+name: db-deploy
+
+# SQL-first object/BAU deployment (see .github/skills/postgres-sql-deployment).
+# PRs validate against a throwaway Postgres; develop -> UAT, master -> Production.
+# Object scripts re-apply every deploy (idempotent); BAU scripts run once per DB via the journal.
+on:
+  push:
+    branches: [develop, master]
+    paths: ['database/scripts/**', '.github/workflows/db-deploy.yml']
+  pull_request:
+    paths: ['database/scripts/**']
+  workflow_dispatch:
+
+jobs:
+  validate:                                   # PR: prove scripts apply cleanly
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env: { POSTGRES_USER: app, POSTGRES_PASSWORD: app, POSTGRES_DB: app }
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U app"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply all scripts to a throwaway DB
+        working-directory: database/scripts
+        env: { PGHOST: localhost, PGPORT: '5432', PGUSER: app, PGPASSWORD: app, PGDATABASE: app }
+        run: |
+          chmod +x apply.sh
+          ./apply.sh --direct --journal
+
+  deploy:                                     # develop -> UAT, master -> Production
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'master' && 'production' || 'uat' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply scripts
+        working-directory: database/scripts
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}   # postgresql://user:pass@host:5432/db
+        run: |
+          chmod +x apply.sh
+          ./apply.sh --direct --journal

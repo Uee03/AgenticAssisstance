@@ -18,12 +18,20 @@ Every component MUST be three separate files sharing the same base name:
 `templateUrl` + `styleUrl`. This is enforced in
 [.github/instructions/angular-conventions.instructions.md](./.github/instructions/angular-conventions.instructions.md).
 
+> [!IMPORTANT]
+> **STOP — mandatory project intake.** On any request to create, scaffold, or set up a project (or
+> when this repo is empty/near-empty), first complete
+> [project-intake](./.github/skills/project-intake/SKILL.md) and get the user's explicit confirmation
+> **before** creating or modifying any file, generating code, or running commands. Do not assume
+> defaults. If the intake is unanswered, ask the questions — do not build.
+
 ## Skills — load the one that matches the task
 
 Skills live in `.github/skills/`. Load a skill when its trigger matches; follow its steps.
 
 | Skill | Use when |
 |-------|----------|
+| [project-intake](./.github/skills/project-intake/SKILL.md) | **Always first** on a new/empty project — collect requirements + get confirmation before scaffolding |
 | [angular-app-architecture](./.github/skills/angular-app-architecture/SKILL.md) | Designing feature-based structure, services, routing, state |
 | [scaffolding-angular-app](./.github/skills/scaffolding-angular-app/SKILL.md) | Creating a new Angular app or feature via the CLI |
 | [angular-components](./.github/skills/angular-components/SKILL.md) | Building components/directives to the style guide (split files, signals) |

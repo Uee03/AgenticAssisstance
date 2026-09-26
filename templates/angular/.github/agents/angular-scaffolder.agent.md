@@ -9,6 +9,9 @@ You are an Angular app scaffolder. You set up new Angular apps and features to t
 
 ## Approach
 
+0. **Gate — run the intake first.** Before creating or modifying any file, load and complete
+   [project-intake](../skills/project-intake/SKILL.md); post the filled-in intake summary and get the
+   user's explicit confirmation. Do not scaffold until they confirm.
 1. Read [AGENTS.md](../../AGENTS.md) and load `scaffolding-angular-app`, `angular-app-architecture`,
    and `angular-components` from `.github/skills/`.
 2. Create the app with the **latest** Angular CLI (`npm create @angular@latest`), choosing routing +

@@ -1,0 +1,2 @@
+# Local runs archive applied BAU scripts here, date-prefixed (yyyyMMdd_<original-name>).
+# CI does not use this folder — it journals applied scripts in app.bau_script_log instead.

@@ -21,7 +21,7 @@ files — so you don't re-explain them every conversation.
 | Bundle | Adds | Pair with |
 |--------|------|-----------|
 | [`foundations/`](./foundations) | Licensing, .gitignore, Docker & services, hosting & deployment (Dokploy/Coolify) | every project |
-| [`sql/`](./sql) | SQLite, PostgreSQL & SQL Server standards + a database-selection guide + local Docker DBs | any backend (dotnet, python) |
+| [`sql/`](./sql) | SQLite, PostgreSQL & SQL Server standards + a database-selection guide + local Docker DBs + a SQL-first object/BAU deploy convention (apply runner + CI to UAT/Prod) | any backend (dotnet, python) |
 | [`supabase/`](./supabase) | Supabase Auth, Postgres + RLS, Storage, CLI/migrations | any backend and/or frontend |
 
 ## How to use a bundle
@@ -30,10 +30,15 @@ files — so you don't re-explain them every conversation.
    your new (empty) project folder. You should end up with an `AGENTS.md` and a `.github/` folder at
    the project root.
 2. Open the project in your AI-enabled editor.
-3. Tell the agent what you're building, e.g. *"Scaffold a new .NET Web API called `Billing`."* The
-   agent reads `AGENTS.md`, discovers the matching **skill**, and scaffolds the project to spec.
+3. Tell the agent what you're building, e.g. *"Scaffold a new .NET Web API called `Billing`."* Before
+  writing any files, the agent runs the bundle's **`project-intake`** skill — a mandatory STOP gate
+  declared at the top of `AGENTS.md` — and asks you every setup decision (app type, API style, doc UI,
+  database, auth, license, `.gitignore`, Docker, hosting). It echoes back an **intake summary** and
+  waits for your confirmation, then scaffolds to spec.
 
-That's it — the bundle is self-contained and needs no build step.
+That's it — the bundle is self-contained and needs no build step. The intake gate guarantees the agent
+asks how to set the project up instead of assuming defaults; to skip it, tell the agent to use defaults
+and it will still show the filled-in summary for a single confirmation.
 
 ## How each bundle is organized
 
@@ -75,6 +80,12 @@ Every bundle ships **ready-made config files** so a fresh project builds and lin
 - **Angular:** `.editorconfig`, `.prettierrc.json`, `.gitignore`.
 - **SQL:** `docker-compose.yml` (local Postgres + SQL Server), `.env.example`.
 - **Supabase:** `.env.example` (client-safe vs server-only keys called out).
+
+For .NET APIs, the scaffolding skill makes the HTTP style an explicit project decision:
+**Controllers** for conventional MVC compatibility and existing controller codebases, or
+**FastEndpoints** for greenfield, feature-sliced REPR endpoints using FluentValidation. Both retain
+thin HTTP handlers, clean-architecture boundaries, OpenAPI, cancellation, asynchronous I/O, and safe
+request handling.
 
 **Run things from VS Code.** Each bundle has `.vscode/tasks.json` — open **Terminal → Run Task** and pick
 `build`, `test`, `run`, `publish`, `publish android (signed aab)`, `db up`, `supabase start`, etc. Tasks

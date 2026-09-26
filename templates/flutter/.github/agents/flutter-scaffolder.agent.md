@@ -9,6 +9,9 @@ You are a Flutter app scaffolder. You set up new Flutter apps and features to th
 
 ## Approach
 
+0. **Gate — run the intake first.** Before creating or modifying any file, load and complete
+   [project-intake](../skills/project-intake/SKILL.md); post the filled-in intake summary and get the
+   user's explicit confirmation. Do not scaffold until they confirm.
 1. Read [AGENTS.md](../../AGENTS.md) and load `scaffolding-flutter-app`, `flutter-app-architecture`,
    and `flutter-state-and-packages` from `.github/skills/`.
 2. Ask the user for target platforms, the state-management/DI approach (if undecided), and whether the

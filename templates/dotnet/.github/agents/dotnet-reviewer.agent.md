@@ -18,15 +18,28 @@ You are a senior .NET reviewer. You review code but never modify it.
 
 - **Architecture:** dependency direction respected (Domain framework-free; Contracts don't reference
   Domain); business logic not in UI/`Program.cs`/endpoints.
+- **API style:** the documented choice is followed. Controllers are small and cohesive; FastEndpoints
+  has one REPR endpoint per operation with feature-local request/response/FluentValidation files.
+  New APIs do not mix Controllers and FastEndpoints without a documented migration boundary.
 - **DI:** constructor injection only; no service locator or `new`-ing dependencies; registered in the
   composition root.
 - **SOLID/design:** small focused interfaces; composition over inheritance; no empty marker base
   classes; explicit mapping (no AutoMapper by default).
+- **CQRS:** where used, commands/queries have their own `ICommand`/`IQuery` + handler interfaces and
+  the endpoint injects the handler directly. Flag **MediatR added to a new project**, CQRS ceremony on
+  a simple CRUD domain, queries containing domain logic, or speculative separate read/write
+  stores/messaging/Event Sourcing.
+- **Services behind interfaces:** injected services with behavior/boundary crossing are defined as
+  `IFooService` + `FooService` and registered/consumed by the interface (mockable + swappable). Flag
+  concrete services injected directly; don't demand interfaces for DTOs/records/value objects/options.
 - **Conventions:** explicit types over `var`; braces on all blocks; `async`/`await` for IO with
   `Async` suffix; `StringComparison.OrdinalIgnoreCase` for case-insensitive compares; one public type
   per file.
 - **Security:** SQL parameterized; secrets from env/user-secrets; tenant isolation enforced where
   multi-tenant; no internal exceptions leaked in API errors.
+- **Request safety:** I/O is asynchronous; cancellation flows to I/O; no `.Result`/`.Wait()` or
+  `Task.Run` in ordinary request paths; `HttpContext` and scoped services are not retained for
+  background work; collection endpoints page unbounded results.
 - **UI (GUI/web):** buttons have icons + no trailing ellipsis; light/dark theme respected; icon-only
   buttons have tooltips.
 - **Docs/tests:** README/AGENTS.md updated when warranted; endpoints documented + OpenAPI exported;
