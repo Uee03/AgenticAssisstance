@@ -35,6 +35,7 @@ Skills live in `.github/skills/`. Load a skill when its trigger matches; follow 
 | [angular-app-architecture](./.github/skills/angular-app-architecture/SKILL.md) | Designing feature-based structure, services, routing, state |
 | [scaffolding-angular-app](./.github/skills/scaffolding-angular-app/SKILL.md) | Creating a new Angular app or feature via the CLI |
 | [angular-components](./.github/skills/angular-components/SKILL.md) | Building components/directives to the style guide (split files, signals) |
+| [primeng-theming](./.github/skills/primeng-theming/SKILL.md) | Changing PrimeNG colors, theming, dark mode, or the look of PrimeNG (Aura) components |
 
 ## Agents
 
