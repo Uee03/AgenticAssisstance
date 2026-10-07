@@ -5,6 +5,8 @@ description: 'Designs relational schemas — tables, primary/foreign keys, relat
 
 # Relational Schema Design
 
+**Best model:** Plan tier (Claude Sonnet 5.5) via the Planner.
+
 Engine-agnostic design rules. For engine-specific syntax/types load
 [postgres-conventions](../postgres-conventions/SKILL.md) or
 [sqlserver-conventions](../sqlserver-conventions/SKILL.md).

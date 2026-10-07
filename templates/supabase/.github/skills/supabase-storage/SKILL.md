@@ -5,6 +5,8 @@ description: 'Uses Supabase Storage — buckets, uploading/downloading files, ac
 
 # Supabase Storage
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or Supabase Scaffolder.
+
 Object storage for files (images, documents, media), backed by the same auth + policy model as the DB.
 
 ## Buckets

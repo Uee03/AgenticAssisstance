@@ -5,6 +5,8 @@ description: 'Guides choosing Flutter state management, routing, dependency inje
 
 # Flutter State Management, DI & Packages
 
+**Best model:** Plan tier (Claude Sonnet 5.5) to choose packages; Act tier (GPT-6.1 Sol) to wire them.
+
 Pick **one** primary state-management approach per app and use it consistently. Prefer well-maintained
 packages; browse [Flutter Gems](https://fluttergems.dev/) and pub.dev (check popularity, maintenance,
 null-safety, and last-updated).

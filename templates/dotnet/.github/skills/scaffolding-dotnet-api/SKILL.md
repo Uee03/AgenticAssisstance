@@ -5,6 +5,8 @@ description: 'Scaffolds a .NET REST/JSON Web API or SaaS backend with clean arch
 
 # Scaffolding a .NET Web API
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 Builds a `Microsoft.NET.Sdk.Web`, `net10.0` backend. First load
 [dotnet-clean-architecture](../dotnet-clean-architecture/SKILL.md) for the layer layout and rules.
 

@@ -5,6 +5,8 @@ description: 'Scaffolds a new Flutter app (or a new feature) with MVVM feature-f
 
 # Scaffolding a Flutter App
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 First load [flutter-app-architecture](../flutter-app-architecture/SKILL.md) and
 [flutter-state-and-packages](../flutter-state-and-packages/SKILL.md).
 

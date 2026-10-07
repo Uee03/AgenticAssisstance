@@ -5,6 +5,8 @@ description: 'Scaffolds a Python JSON API / SaaS backend with clean architecture
 
 # Scaffolding a Python API
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 Builds a JSON API / backend. First load
 [python-clean-architecture](../python-clean-architecture/SKILL.md).
 

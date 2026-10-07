@@ -2,6 +2,7 @@
 description: 'Read-only reviewer for .NET/C# changes. Checks architecture boundaries, SOLID, DI usage, conventions, security (SQL/secrets), and UI rules. Use when reviewing a diff, PR, or file before merge in a .NET project.'
 name: '.NET Reviewer'
 tools: [read, search]
+model: ['Claude Sonnet 5.5 (copilot)', 'Claude Sonnet 5 (copilot)', 'GPT-5.6 Terra (copilot)']
 user-invocable: true
 ---
 

@@ -5,6 +5,8 @@ description: 'Recommends where to host an app when the user has no server — ma
 
 # Choosing Where to Host
 
+**Best model:** Plan tier (Claude Sonnet 5.5) via the Planner or Deployment Advisor.
+
 If the user has no server, recommend an option that fits their **budget, scale, and ops comfort**.
 There are three camps — pick based on how much infrastructure they want to own.
 

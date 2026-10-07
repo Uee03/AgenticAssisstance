@@ -5,6 +5,8 @@ description: 'Deploys an app to your own VPS using Dokploy (or Coolify) — a se
 
 # Deploying with Dokploy (self-hosted PaaS)
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer.
+
 Get a Heroku-like, git/Docker deploy experience on a cheap VPS you control. **Dokploy** is the default
 here; **Coolify** is an equivalent alternative (same idea, similar steps). Prerequisite: a container
 image (see [docker-and-services](../docker-and-services/SKILL.md)).

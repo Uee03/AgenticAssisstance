@@ -5,6 +5,8 @@ description: 'Designs clean, layered Python solution structure — src layout, d
 
 # Python Clean Architecture
 
+**Best model:** Plan tier (Claude Sonnet 5.5) via the Planner or a reviewer agent.
+
 Foundation rules for every Python app in this repo. Scaffolding skills (API, web app, desktop) build
 on top of this.
 

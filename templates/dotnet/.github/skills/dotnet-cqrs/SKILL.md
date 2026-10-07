@@ -5,6 +5,8 @@ description: 'Applies the CQRS pattern in .NET the right way — separate Comman
 
 # CQRS in .NET (without MediatR)
 
+**Best model:** Plan tier (Claude Sonnet 5.5) to decide if and where; Act tier (GPT-6.1 Sol) to implement.
+
 CQRS (Command Query Responsibility Segregation) splits a system into a **write model** (commands that
 change state) and a **read model** (queries that return data). Load
 [dotnet-clean-architecture](../dotnet-clean-architecture/SKILL.md) first — CQRS lives in the

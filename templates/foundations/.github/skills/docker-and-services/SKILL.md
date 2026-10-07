@@ -5,6 +5,8 @@ description: 'Containerizes local development and adds backing services — Post
 
 # Docker & Backing Services
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer.
+
 ## Ask the user
 
 > "Do you want to use **Docker** for local development? (Recommended — a local Postgres in

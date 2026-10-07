@@ -2,6 +2,7 @@
 description: 'Sets up a new Python project end-to-end: uv + pyproject.toml, src layout, DI, typed settings, first feature slice, tests, and docs. Use when starting a new Python project or adding a major new subsystem.'
 name: 'Python Scaffolder'
 tools: [read, edit, search, execute]
+model: ['GPT-6.1 Sol (copilot)', 'GPT-6 Sol (copilot)', 'GPT-5.6 Sol (copilot)', 'GPT-5.6 Terra (copilot)']
 argument-hint: 'Project name + app type (API / web app / desktop)'
 ---
 

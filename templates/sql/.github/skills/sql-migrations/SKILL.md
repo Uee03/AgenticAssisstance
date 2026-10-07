@@ -5,6 +5,8 @@ description: 'Creates and versions database migrations safely — forward-only, 
 
 # Database Migrations
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer; Deep tier (Claude Opus 5.5) for risky data migrations.
+
 All schema changes are **versioned migrations** checked into git. Never hand-edit a production schema
 or edit an already-applied migration.
 

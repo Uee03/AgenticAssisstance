@@ -5,6 +5,8 @@ description: 'Scaffolds a Windows desktop .NET app using WinForms or WPF with MV
 
 # Scaffolding a .NET Desktop App (WinForms / WPF)
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 Windows-only desktop GUI. For Windows + Linux + macOS use
 [scaffolding-dotnet-crossplatform](../scaffolding-dotnet-crossplatform/SKILL.md). First load
 [dotnet-clean-architecture](../dotnet-clean-architecture/SKILL.md).

@@ -2,6 +2,7 @@
 description: 'Sets up a new .NET/C# solution end-to-end: solution + projects, central package management, DI, first feature slice, tests, and docs. Use when starting a new .NET project or adding a major new subsystem.'
 name: '.NET Scaffolder'
 tools: [read, edit, search, execute]
+model: ['GPT-6.1 Sol (copilot)', 'GPT-6 Sol (copilot)', 'GPT-5.6 Sol (copilot)', 'GPT-5.6 Terra (copilot)']
 argument-hint: 'Project name + app type (API / web app / desktop / cross-platform)'
 ---
 

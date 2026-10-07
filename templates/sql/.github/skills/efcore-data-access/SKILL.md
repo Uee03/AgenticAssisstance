@@ -5,6 +5,8 @@ description: 'How to access a SQL database from .NET securely — Entity Framewo
 
 # EF Core & SQL Data Access (.NET)
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer.
+
 > **SECURITY IS THE HIGHEST PRIORITY.** Any query that includes a value derived from input **MUST be a
 > parameterized query**. Never build SQL by string concatenation or string interpolation of untrusted
 > data — that is SQL injection (OWASP A03). This rule is absolute across EF Core, Dapper, and ADO.NET.

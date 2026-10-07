@@ -5,6 +5,8 @@ description: 'Designs Angular app structure per the official style guide — src
 
 # Angular App Architecture (feature-based)
 
+**Best model:** Plan tier (Claude Sonnet 5.5) via the Planner or a reviewer agent.
+
 Follows the [Angular style guide](https://angular.dev/style-guide). Scaffolding and component skills
 build on this.
 

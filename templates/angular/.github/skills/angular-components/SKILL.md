@@ -5,6 +5,8 @@ description: 'Builds Angular components and directives to the official style gui
 
 # Angular Components & Directives
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 Follows the [Angular style guide](https://angular.dev/style-guide). Always generate with the CLI
 (`ng generate component ...`) rather than hand-writing boilerplate.
 

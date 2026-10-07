@@ -5,6 +5,8 @@ description: 'Scaffolds a new Angular app (or feature) via the Angular CLI on th
 
 # Scaffolding an Angular App
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 First load [angular-app-architecture](../angular-app-architecture/SKILL.md) and
 [angular-components](../angular-components/SKILL.md).
 

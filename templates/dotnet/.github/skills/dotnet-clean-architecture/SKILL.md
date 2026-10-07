@@ -5,6 +5,8 @@ description: 'Designs clean, layered .NET/C# solution structure — project layo
 
 # .NET Clean Architecture
 
+**Best model:** Plan tier (Claude Sonnet 5.5) via the Planner or a reviewer agent.
+
 Foundation rules for every .NET app in this repo. Scaffolding skills (API, web app, desktop,
 cross-platform) build on top of this.
 

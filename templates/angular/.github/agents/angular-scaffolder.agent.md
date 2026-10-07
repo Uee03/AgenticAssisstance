@@ -2,6 +2,7 @@
 description: 'Sets up a new Angular app or feature end-to-end via the CLI: latest version, feature-based structure, split component files, routing, theming, first feature slice, and tests. Use when starting a new Angular project or adding a feature.'
 name: 'Angular Scaffolder'
 tools: [read, edit, search, execute]
+model: ['GPT-6.1 Sol (copilot)', 'GPT-6 Sol (copilot)', 'GPT-5.6 Sol (copilot)', 'GPT-5.6 Terra (copilot)']
 argument-hint: 'Project/feature name'
 ---
 

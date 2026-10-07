@@ -5,6 +5,8 @@ description: 'Mandatory pre-scaffolding intake for a new Angular project. ALWAYS
 
 # Project intake (Angular) — do this before scaffolding
 
+**Best model:** Plan tier (Claude Sonnet 5.5); if already inside a scaffolder agent, stay on its model.
+
 **Hard gate.** Do NOT create files, generate code, add packages, or run commands until every
 question below is answered and you have echoed the choices back and received an explicit "yes".
 Never assume defaults or "sensible" choices — ask. If the user says "just pick defaults", still show

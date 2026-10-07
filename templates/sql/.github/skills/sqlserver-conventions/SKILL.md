@@ -5,6 +5,8 @@ description: 'Conventions for writing Microsoft SQL Server (T-SQL) DDL and SQL â
 
 # SQL Server (T-SQL) Conventions
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer; Plan tier (Claude Sonnet 5.5) via SQL Reviewer for review.
+
 Pair with [sql-schema-design](../sql-schema-design/SKILL.md) for engine-agnostic design.
 
 ## Naming

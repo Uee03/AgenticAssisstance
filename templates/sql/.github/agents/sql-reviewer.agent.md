@@ -2,6 +2,7 @@
 description: 'Read-only reviewer for SQL DDL, queries, and migrations (PostgreSQL & SQL Server). Checks schema integrity, indexing, injection safety, type choices, and migration safety. Use when reviewing SQL, a schema change, or a migration before merge.'
 name: 'SQL Reviewer'
 tools: [read, search]
+model: ['Claude Sonnet 5.5 (copilot)', 'Claude Sonnet 5 (copilot)', 'GPT-5.6 Terra (copilot)']
 user-invocable: true
 ---
 

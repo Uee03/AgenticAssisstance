@@ -2,6 +2,7 @@
 description: 'Sets up a new Flutter app or feature end-to-end: latest SDK, feature-first MVVM structure, theming, routing, DI, first feature slice, and tests. Use when starting a new Flutter project or adding a feature.'
 name: 'Flutter Scaffolder'
 tools: [read, edit, search, execute]
+model: ['GPT-6.1 Sol (copilot)', 'GPT-6 Sol (copilot)', 'GPT-5.6 Sol (copilot)', 'GPT-5.6 Terra (copilot)']
 argument-hint: 'Project/feature name + target platforms'
 ---
 

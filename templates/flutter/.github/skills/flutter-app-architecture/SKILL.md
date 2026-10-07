@@ -5,6 +5,8 @@ description: 'Designs Flutter app structure using MVVM and a feature-first folde
 
 # Flutter App Architecture (MVVM, feature-first)
 
+**Best model:** Plan tier (Claude Sonnet 5.5) via the Planner or a reviewer agent.
+
 Follows the official [Flutter architecture guide](https://docs.flutter.dev/app-architecture/guide).
 Scaffolding and state-management skills build on this.
 

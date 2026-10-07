@@ -5,6 +5,8 @@ description: 'SQL-first PostgreSQL (15+) deployment convention — SQL organized
 
 # PostgreSQL SQL-first Deployment (object + BAU scripts)
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer.
+
 An alternative to tool-managed migrations (EF Core/Alembic/Flyway — see
 [sql-migrations](../sql-migrations/SKILL.md)): plain `.sql` files organized **by what they change**,
 applied in a fixed order by a small runner, deployable via CI to multiple environments. Targets

@@ -5,6 +5,8 @@ description: 'Designs Supabase Postgres schema via migrations and writes/reviews
 
 # Supabase Database & Row Level Security
 
+**Best model:** Act tier (GPT-6.1 Sol) to write policies; Plan tier (Claude Sonnet 5.5) to review them.
+
 Supabase is PostgreSQL — follow the `sql` bundle's schema-design + Postgres conventions + migration
 rules. This skill adds the **RLS** layer, which is Supabase's core security boundary.
 

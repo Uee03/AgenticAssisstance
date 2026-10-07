@@ -5,6 +5,8 @@ description: 'Conventions for using SQLite — the zero-setup, single-file datab
 
 # SQLite Conventions
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer; Plan tier (Claude Sonnet 5.5) via SQL Reviewer for review.
+
 SQLite is a serverless, single-file database — ideal for **quick wins**: prototypes, CLIs, desktop
 apps, single-user tools, and fast/deterministic tests. No Docker, no server. Pair with
 [sql-schema-design](../sql-schema-design/SKILL.md); it is **not** for high write-concurrency or

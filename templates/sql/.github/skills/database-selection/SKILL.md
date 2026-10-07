@@ -5,6 +5,8 @@ description: 'Helps choose a database for a new app and wire it into a .NET or P
 
 # Choosing a Database
 
+**Best model:** Plan tier (Claude Sonnet 5.5) via the Planner.
+
 Backend scaffolding skills (`scaffolding-dotnet-api`, `scaffolding-python-api`, the web-app skills)
 reference this. **Before adding any persistence, ask the user which database to use** and confirm the
 answer — don't silently default.

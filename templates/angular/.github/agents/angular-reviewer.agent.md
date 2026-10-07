@@ -2,6 +2,7 @@
 description: 'Read-only reviewer for Angular changes. Checks split component files, feature-based structure, signals/inject usage, template rules, lint cleanliness, and UI rules. Use when reviewing a diff, PR, or file before merge in an Angular project.'
 name: 'Angular Reviewer'
 tools: [read, search]
+model: ['Claude Sonnet 5.5 (copilot)', 'Claude Sonnet 5 (copilot)', 'GPT-5.6 Terra (copilot)']
 user-invocable: true
 ---
 

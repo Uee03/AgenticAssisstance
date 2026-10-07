@@ -5,6 +5,8 @@ description: 'Adds or confirms a .gitignore for the stack using the github/gitig
 
 # .gitignore Setup
 
+**Best model:** Quick tier (GPT-6 Luna) via Quick Helper.
+
 Every app bundle already ships a stack-appropriate `.gitignore`. When starting a fresh repo (or one
 without a bundle), add or confirm one. **Ask the user if they want a `.gitignore`** and generate it
 from a trusted template rather than hand-rolling.

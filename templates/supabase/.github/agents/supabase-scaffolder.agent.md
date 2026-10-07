@@ -2,6 +2,7 @@
 description: 'Sets up Supabase in a project end-to-end: CLI init + local stack, safe key/env wiring, schema migrations with RLS enabled, auth, storage, and a typed client. Use when adding Supabase to a new or existing app.'
 name: 'Supabase Scaffolder'
 tools: [read, edit, search, execute]
+model: ['GPT-6.1 Sol (copilot)', 'GPT-6 Sol (copilot)', 'GPT-5.6 Sol (copilot)', 'GPT-5.6 Terra (copilot)']
 argument-hint: 'What to set up (auth / database + RLS / storage / full)'
 ---
 

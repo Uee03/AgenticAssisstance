@@ -5,6 +5,8 @@ description: 'Initializes Supabase in a project — CLI install, local dev stack
 
 # Supabase Setup
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or Supabase Scaffolder.
+
 ## Keys & environment (get this right first)
 
 Supabase gives you three values plus secrets:

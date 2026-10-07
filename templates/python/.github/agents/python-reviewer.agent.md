@@ -2,6 +2,7 @@
 description: 'Read-only reviewer for Python changes. Checks architecture boundaries, type hints, Protocol-based DI, conventions, security (SQL/secrets), and UI rules. Use when reviewing a diff, PR, or file before merge in a Python project.'
 name: 'Python Reviewer'
 tools: [read, search]
+model: ['Claude Sonnet 5.5 (copilot)', 'Claude Sonnet 5 (copilot)', 'GPT-5.6 Terra (copilot)']
 user-invocable: true
 ---
 

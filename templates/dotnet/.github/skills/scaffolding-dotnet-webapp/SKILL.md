@@ -5,6 +5,8 @@ description: 'Scaffolds a server-rendered .NET web application using Blazor, Raz
 
 # Scaffolding a .NET Web App (Blazor / Razor / MVC)
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 For UI-bearing web apps (server-rendered pages/components), not pure JSON APIs. If the app is only a
 JSON backend, use [scaffolding-dotnet-api](../scaffolding-dotnet-api/SKILL.md) instead. First load
 [dotnet-clean-architecture](../dotnet-clean-architecture/SKILL.md).

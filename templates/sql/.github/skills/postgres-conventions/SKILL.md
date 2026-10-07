@@ -5,6 +5,8 @@ description: 'Conventions for writing PostgreSQL DDL and SQL — snake_case nami
 
 # PostgreSQL Conventions
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer; Plan tier (Claude Sonnet 5.5) via SQL Reviewer for review.
+
 Pair with [sql-schema-design](../sql-schema-design/SKILL.md) for engine-agnostic design.
 
 ## Naming

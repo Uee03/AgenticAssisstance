@@ -1,9 +1,11 @@
 ---
 name: primeng-theming
-description: Customize the PrimeNG (Aura) theme for this Angular app — brand colors, light/dark palettes, surfaces, form fields, and per-component overrides. Use whenever the user asks to change colors, theming, dark mode, or the look of PrimeNG components. Applies to any modern PrimeNG / PrimeUIX version (v19+).
+description: Customize the PrimeNG (Aura) theme for this Angular app — brand colors, light/dark palettes, surfaces, form fields, and per-component overrides — and follow current PrimeNG component usage conventions (e.g. buttons). Use whenever the user asks to change colors, theming, dark mode, the look of PrimeNG components, or how to author PrimeNG buttons. Applies to any modern PrimeNG / PrimeUIX version (v19+).
 ---
 
 # PrimeNG Theming Skill
+
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
 
 > Applies to **any modern PrimeNG version (v19+)** that uses the design-token theming
 > system (`definePreset` + `providePrimeNG`). Package names and a few tokens may differ
@@ -74,3 +76,42 @@ current version, inspect the base preset source:
 - Use inline `light-dark()` for class-based dark mode, or override component CSS via `::ng-deep`.
 - Edit global `primary.color` when only one component should change.
 - Assume a token name without checking the installed preset if unsure.
+
+## PrimeNG Buttons (Angular, PrimeNG v21+)
+
+Always use the `[pButton]` directive on a native `<button>` — never the `<p-button>`
+component. The `<p-button>` component and the `pButtonLabel` / `pButtonIcon` directives
+are deprecated since PrimeNG v21 and will be removed.
+
+Rules:
+- Import `ButtonDirective` (or `ButtonModule`) from `primeng/button`.
+- Icon = an `<i class="pi pi-...">` child. Label = a text node / `<span>` child placed
+  directly inside the host. Do NOT use the `icon=` / `label=` inputs.
+- Use the native `(click)` output, never `(onClick)`.
+- Icon-only buttons: set `[iconOnly]="true"`; no trailing ellipsis in labels; must work in
+  light and dark themes.
+- Do NOT use the deprecated `[loading]` input. Drive loading with native `[disabled]`
+  plus a spinner icon child (`pi pi-spin pi-spinner`).
+- Styling inputs on the directive: `[text]`, `[outlined]`, `[rounded]`, `[raised]`,
+  `variant`, `severity`, `size`.
+
+✅ Correct:
+```html
+<button pButton type="button" [text]="true" (click)="save()">
+  <i class="pi pi-check"></i>
+  <span>Save</span>
+</button>
+```
+
+✅ With loading:
+```html
+<button pButton type="button" [disabled]="saving()" (click)="save()">
+  <i [class]="saving() ? 'pi pi-spin pi-spinner' : 'pi pi-check'"></i>
+  <span>Save</span>
+</button>
+```
+
+❌ Deprecated — never generate this:
+```html
+<p-button icon="pi pi-check" label="Save" [text]="true" (onClick)="save()" />
+```

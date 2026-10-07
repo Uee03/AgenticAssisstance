@@ -2,6 +2,7 @@
 description: 'Read-only reviewer for Flutter/Dart changes. Checks MVVM boundaries, widget purity, state management consistency, analyzer cleanliness, and UI rules. Use when reviewing a diff, PR, or file before merge in a Flutter project.'
 name: 'Flutter Reviewer'
 tools: [read, search]
+model: ['Claude Sonnet 5.5 (copilot)', 'Claude Sonnet 5 (copilot)', 'GPT-5.6 Terra (copilot)']
 user-invocable: true
 ---
 

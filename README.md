@@ -15,6 +15,7 @@ files — so you don't re-explain them every conversation.
 | [`python/`](./python) | Python (latest, 3.13) | API, Web App, Desktop |
 | [`flutter/`](./flutter) | Flutter / Dart (latest stable) | Frontend (mobile / web / desktop) |
 | [`angular/`](./angular) | Angular (latest, v22) | Frontend (web) |
+| [`templates/unity/`](./templates/unity) | Unity / C# (project or package's supported version) | 2D, 3D, Editor tools, reusable UPM packages |
 
 **Overlay bundles** (drop *alongside* an app bundle to add a capability — they don't stand alone):
 
@@ -23,6 +24,7 @@ files — so you don't re-explain them every conversation.
 | [`foundations/`](./foundations) | Licensing, .gitignore, Docker & services, hosting & deployment (Dokploy/Coolify) | every project |
 | [`sql/`](./sql) | SQLite, PostgreSQL & SQL Server standards + a database-selection guide + local Docker DBs + a SQL-first object/BAU deploy convention (apply runner + CI to UAT/Prod) | any backend (dotnet, python) |
 | [`supabase/`](./supabase) | Supabase Auth, Postgres + RLS, Storage, CLI/migrations | any backend and/or frontend |
+| [`workspace/`](./workspace) | Model-routed agents (Quick, Planner, Implementer, Deep Researcher, Orchestrator), `/quick` `/plan` `/act` `/deep-research`, and skills for model routing, idea research, project planning, UML, Mermaid, and draw.io diagrams. Usage and prompting guide: [`docs/ai-workflow.md`](./workspace/docs/ai-workflow.md) | every project |
 
 ## How to use a bundle
 
@@ -39,6 +41,33 @@ files — so you don't re-explain them every conversation.
 That's it — the bundle is self-contained and needs no build step. The intake gate guarantees the agent
 asks how to set the project up instead of assuming defaults; to skip it, tell the agent to use defaults
 and it will still show the filled-in summary for a single confirmation.
+
+### Unity projects and packages
+
+Copy the contents of [`templates/unity/`](./templates/unity) into a Unity project or reusable UPM
+package root, merging existing `AGENTS.md` and `.github/` guidance. This bundle provides engineering
+workflows, not a generated Unity project, Editor automation server, or ready-made build/CI scripts.
+It preserves the existing project type, pipeline, supported Unity versions, and Unity-installed
+template packages. It works standalone; the workspace overlay is optional.
+
+Use **Unity Architect** for plans, **Unity Developer** for approved implementation, **Unity Performance
+Auditor** for evidence-ranked profiling findings, and **Unity Reviewer** for correctness/API reviews.
+Select these agents directly after copying; the generic Orchestrator's existing allow-list is unchanged.
+Check Chat Diagnostics and the agent picker after installation; source files under `templates/` are
+not themselves installed workspace agents.
+
+The 19 skills cover SOLID/clean architecture, the requested design patterns, built-in pooling,
+optimization, async/reactive ownership, ScriptableObjects, UI Toolkit, Editor tools, Addressables,
+smooth scene transitions, Input System, multiplayer, Shader/VFX Graph, shared types, intake, testing,
+review, and architecture decisions. User-added **R3, ZLinq, UniTask, LitMotion, and NuGetForUnity** have
+explicit installation/version checks; none is installed automatically or required in every package API.
+Manual DI remains the baseline unless the project already selects a container, and netcode selection
+requires confirmation. Graph editing needs verified Editor tools; otherwise the agent reports manual steps.
+
+Start with [Unity guidance](./templates/unity/AGENTS.md). For package development, supply a consumer
+test host and minimum Unity version. [Verification recipes](./templates/unity/.github/skills/unity-testing/reference/verification-commands.md)
+cover Editor compilation, EditMode/PlayMode tests, player gates, and agent smoke checks. Missing Editor,
+licensing, or host access must be disclosed, not treated as a successful build.
 
 ## How each bundle is organized
 
@@ -69,6 +98,28 @@ Every bundle uses the same layout so agents always know where to look:
 This mirrors [progressive disclosure](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices):
 only the small `AGENTS.md` + skill descriptions are always in context; full skill bodies and reference
 files load only when relevant, keeping the context window lean.
+
+## Model routing (workspace bundle + pinned agents)
+
+Custom agents pin their model with `model:` in `.github/agents/*.agent.md` (a list = fallback order).
+Every agent in every bundle is pinned to one of four tiers; the `workspace/` bundle adds the generic
+agents and slash commands. It has no `AGENTS.md`, so it copies in without merging.
+
+| Tier | Agents | Model | Why |
+|------|--------|-------|-----|
+| 1 Quick | Quick Helper `/quick` | GPT-6 Luna | lowest price, one-file edits |
+| 2 Plan | Planner `/plan`, all reviewers, Deployment Advisor, Unity Architect, Unity Performance Auditor | Claude Sonnet 5.5 | fewest steps/tokens, read-only |
+| 3 Act | Implementer `/act`, all scaffolders, Unity Developer | GPT-6.1 Sol | same price as Sonnet 5.5, half the cached-input price in edit/test loops |
+| 4 Deep | Deep Researcher `/deep-research` | Claude Opus 5.5 | 20% cheaper than Opus 5, strong error recovery |
+
+**Orchestrator** routes automatically by delegating to the four specialists as subagents. Every skill in
+every bundle names its best tier on the line under its title (skills cannot pin a model; the agent
+running them does). Full price table, sources, and how to change a tier:
+`workspace/.github/skills/model-routing/`.
+
+What files cannot do: cap a context window or set thinking effort per agent, or choose the inline
+completion model (a Copilot setting; completions are not billed in AI credits). Context stays small
+through the rules in `workspace/.github/copilot-instructions.md`.
 
 ## Config, build scripts, publish output & signing
 

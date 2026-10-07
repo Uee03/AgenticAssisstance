@@ -5,6 +5,8 @@ description: 'Adds authentication with Supabase Auth — email/password and OAut
 
 # Supabase Auth
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or Supabase Scaffolder.
+
 Supabase Auth issues a JWT containing the user id (`auth.uid()`) and role. That JWT is what RLS
 policies use to authorize row access — auth and the database are tightly linked.
 

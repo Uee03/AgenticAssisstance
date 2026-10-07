@@ -5,6 +5,8 @@ description: 'Scaffolds a cross-platform .NET app (Windows/Linux/macOS/mobile) u
 
 # Scaffolding a Cross-platform .NET App (Avalonia / MAUI / CLI)
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 Runs beyond Windows. First load [dotnet-clean-architecture](../dotnet-clean-architecture/SKILL.md).
 
 ## Ask the user first

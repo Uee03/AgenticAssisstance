@@ -5,6 +5,8 @@ description: 'Scaffolds a server-rendered Python web application with templates 
 
 # Scaffolding a Python Web App (Django / Flask + templates)
 
+**Best model:** Act tier (GPT-6.1 Sol) via the Implementer or a scaffolder agent.
+
 For UI-bearing, server-rendered web apps. If the app is only a JSON backend, use
 [scaffolding-python-api](../scaffolding-python-api/SKILL.md). First load
 [python-clean-architecture](../python-clean-architecture/SKILL.md).

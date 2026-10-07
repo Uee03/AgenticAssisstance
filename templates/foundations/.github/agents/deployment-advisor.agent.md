@@ -2,6 +2,7 @@
 description: 'Read-only advisor that recommends hosting and backing services for an app based on scale, budget, and ops comfort. Use when the user asks where/how to deploy, whether to use a PaaS or VPS, or which services (Postgres/Redis/RabbitMQ) they need.'
 name: 'Deployment Advisor'
 tools: [read, search, web]
+model: ['Claude Sonnet 5.5 (copilot)', 'Claude Sonnet 5 (copilot)', 'GPT-5.6 Terra (copilot)']
 user-invocable: true
 ---
 

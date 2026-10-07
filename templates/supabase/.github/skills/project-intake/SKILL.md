@@ -5,6 +5,8 @@ description: 'Mandatory pre-integration intake for adding Supabase to a project.
 
 # Project intake (Supabase) — do this before wiring anything
 
+**Best model:** Plan tier (Claude Sonnet 5.5); if already inside a scaffolder agent, stay on its model.
+
 **Hard gate.** Do NOT create files, run migrations, add clients/keys, or run commands until every
 question below is answered and you have echoed the choices back and received an explicit "yes".
 Never assume defaults — ask. Getting keys or RLS wrong is a security problem, so confirm first.

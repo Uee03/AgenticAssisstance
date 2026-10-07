@@ -5,6 +5,8 @@ description: 'Chooses and adds a software license — open source (MIT, Apache-2
 
 # Project Licensing
 
+**Best model:** Quick tier (GPT-6 Luna) via Quick Helper.
+
 Add a license at project start. **Ask first — don't assume MIT.**
 
 ## Step 1 — ask: open source or closed/commercial?
