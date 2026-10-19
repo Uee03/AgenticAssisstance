@@ -24,7 +24,7 @@ files — so you don't re-explain them every conversation.
 | [`foundations/`](./foundations) | Licensing, .gitignore, Docker & services, hosting & deployment (Dokploy/Coolify) | every project |
 | [`sql/`](./sql) | SQLite, PostgreSQL & SQL Server standards + a database-selection guide + local Docker DBs + a SQL-first object/BAU deploy convention (apply runner + CI to UAT/Prod) | any backend (dotnet, python) |
 | [`supabase/`](./supabase) | Supabase Auth, Postgres + RLS, Storage, CLI/migrations | any backend and/or frontend |
-| [`workspace/`](./workspace) | Model-routed agents (Quick, Planner, Implementer, Deep Researcher, Orchestrator), `/quick` `/plan` `/act` `/deep-research`, and skills for model routing, idea research, project planning, UML, Mermaid, and draw.io diagrams. Usage and prompting guide: [`docs/ai-workflow.md`](./workspace/docs/ai-workflow.md) | every project |
+| [`workspace/`](./workspace) | Model-routed agents (Quick, Planner, Implementer, Deep Researcher, SVG Designer, Orchestrator), `/quick` `/plan` `/act` `/deep-research`, and skills for model routing, idea research, project planning, UML, Mermaid, draw.io diagrams, and hand-written SVG (icons, logos, sprites). Usage and prompting guide: [`docs/ai-workflow.md`](./workspace/docs/ai-workflow.md) | every project |
 
 ## How to use a bundle
 
@@ -50,19 +50,25 @@ workflows, not a generated Unity project, Editor automation server, or ready-mad
 It preserves the existing project type, pipeline, supported Unity versions, and Unity-installed
 template packages. It works standalone; the workspace overlay is optional.
 
-Use **Unity Architect** for plans, **Unity Developer** for approved implementation, **Unity Performance
-Auditor** for evidence-ranked profiling findings, and **Unity Reviewer** for correctness/API reviews.
+Use **Unity Architect** for plans, **Unity Developer** for approved implementation, **Unity UITK Editor
+Tools** for approved Editor windows, inspectors, drawers and USS, **Unity Performance Auditor** for
+evidence-ranked profiling findings, and **Unity Reviewer** for correctness/API reviews.
 Select these agents directly after copying; the generic Orchestrator's existing allow-list is unchanged.
 Check Chat Diagnostics and the agent picker after installation; source files under `templates/` are
 not themselves installed workspace agents.
 
-The 19 skills cover SOLID/clean architecture, the requested design patterns, built-in pooling,
+The 25 skills cover SOLID/clean architecture, the requested design patterns, built-in pooling,
 optimization, async/reactive ownership, ScriptableObjects, UI Toolkit, Editor tools, Addressables,
 smooth scene transitions, Input System, multiplayer, Shader/VFX Graph, shared types, intake, testing,
 review, and architecture decisions. User-added **R3, ZLinq, UniTask, LitMotion, and NuGetForUnity** have
 explicit installation/version checks; none is installed automatically or required in every package API.
 Manual DI remains the baseline unless the project already selects a container, and netcode selection
 requires confirmation. Graph editing needs verified Editor tools; otherwise the agent reports manual steps.
+
+Six `unity-uitk-*` skills go deeper on UI Toolkit Editor tooling: windows and Settings pages, UXML/USS
+naming and themes, inspectors and property drawers, `[UxmlElement]` controls, data binding, and a
+performance checklist. They use a placeholder class prefix, so each project picks its own. The
+**Unity UITK Editor Tools** agent follows them.
 
 Start with [Unity guidance](./templates/unity/AGENTS.md). For package development, supply a consumer
 test host and minimum Unity version. [Verification recipes](./templates/unity/.github/skills/unity-testing/reference/verification-commands.md)
@@ -109,7 +115,7 @@ agents and slash commands. It has no `AGENTS.md`, so it copies in without mergin
 |------|--------|-------|-----|
 | 1 Quick | Quick Helper `/quick` | GPT-6 Luna | lowest price, one-file edits |
 | 2 Plan | Planner `/plan`, all reviewers, Deployment Advisor, Unity Architect, Unity Performance Auditor | Claude Sonnet 5.5 | fewest steps/tokens, read-only |
-| 3 Act | Implementer `/act`, all scaffolders, Unity Developer | GPT-6.1 Sol | same price as Sonnet 5.5, half the cached-input price in edit/test loops |
+| 3 Act | Implementer `/act`, all scaffolders, SVG Designer, Unity Developer, Unity UITK Editor Tools | GPT-6.1 Sol | same price as Sonnet 5.5, half the cached-input price in edit/test loops |
 | 4 Deep | Deep Researcher `/deep-research` | Claude Opus 5.5 | 20% cheaper than Opus 5, strong error recovery |
 
 **Orchestrator** routes automatically by delegating to the four specialists as subagents. Every skill in

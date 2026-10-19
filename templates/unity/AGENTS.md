@@ -29,10 +29,11 @@ overwriting it. The workspace overlay is optional; Unity agents work without it.
 |-------|------|
 | [Unity Architect](./.github/agents/unity-architect.agent.md) | Read-only design, trade-offs, and implementation checklist |
 | [Unity Developer](./.github/agents/unity-developer.agent.md) | Approved changes with compile/test loops |
+| [Unity UITK Editor Tools](./.github/agents/unity-uitk-editor-tools.agent.md) | Approved Editor windows, inspectors, drawers, USS and controls on UI Toolkit |
 | [Unity Performance Auditor](./.github/agents/unity-performance-auditor.agent.md) | Read-only, evidence-ranked performance findings |
 | [Unity Reviewer](./.github/agents/unity-reviewer.agent.md) | Read-only correctness, lifecycle, serialization, and API review |
 
-Architect, Auditor, and Reviewer use Plan tier; Developer uses Act tier with model fallbacks.
+Architect, Auditor, and Reviewer use Plan tier; Developer and UITK Editor Tools use Act tier with model fallbacks.
 Reviewers distinguish measured facts from hypotheses. Two failed fixes require a Deep Research
 handoff if that optional workspace agent is installed, otherwise a written investigation brief.
 
@@ -47,8 +48,14 @@ handoff if that optional workspace agent is installed, otherwise a written inves
 | [unity-optimization](./.github/skills/unity-optimization/SKILL.md) | Profiling, allocations, ZLinq, CPU/GPU/memory budgets |
 | [unity-async-reactive](./.github/skills/unity-async-reactive/SKILL.md) | UniTask, R3, LitMotion, coroutines, delegates, Action, Func |
 | [unity-scriptable-objects](./.github/skills/unity-scriptable-objects/SKILL.md) | Shared configuration, event channels, runtime state isolation |
-| [unity-ui-toolkit](./.github/skills/unity-ui-toolkit/SKILL.md) | UXML/USS, presenters, binding, virtualization, UI lifecycle |
+| [unity-ui-toolkit](./.github/skills/unity-ui-toolkit/SKILL.md) | Runtime UI architecture: presenters, R3/LitMotion, virtualization, focus, UI lifecycle |
 | [unity-editor-tools](./.github/skills/unity-editor-tools/SKILL.md) | EditorWindow, custom inspectors, PropertyDrawers, Undo |
+| [unity-uitk-editor-window](./.github/skills/unity-uitk-editor-window/SKILL.md) | UI Toolkit Editor windows, menu items, Settings pages, persisted tool state |
+| [unity-uitk-uss-style-system](./.github/skills/unity-uitk-uss-style-system/SKILL.md) | UXML/USS naming (BEM), variables, themes, transitions, editor skins |
+| [unity-uitk-inspector-and-drawers](./.github/skills/unity-uitk-inspector-and-drawers/SKILL.md) | `CreateInspectorGUI`, `CreatePropertyGUI`, SerializedObject binding |
+| [unity-uitk-custom-controls](./.github/skills/unity-uitk-custom-controls/SKILL.md) | `[UxmlElement]` controls, `BaseField<T>`, events, lifecycle |
+| [unity-uitk-data-binding](./.github/skills/unity-uitk-data-binding/SKILL.md) | SerializedObject and runtime data binding, converters, change tracking |
+| [unity-uitk-performance-review](./.github/skills/unity-uitk-performance-review/SKILL.md) | UI Toolkit element, style, rendering, binding and leak checklist |
 | [unity-addressables](./.github/skills/unity-addressables/SKILL.md) | Asset handles, bundles, catalogs, resource lifetime |
 | [unity-scene-loading](./.github/skills/unity-scene-loading/SKILL.md) | Smooth transitions, additive loading, activation and recovery |
 | [unity-input-system](./.github/skills/unity-input-system/SKILL.md) | Action maps, rebinding, players, input adapters |

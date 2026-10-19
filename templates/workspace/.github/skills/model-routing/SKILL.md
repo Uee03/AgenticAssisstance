@@ -16,7 +16,7 @@ order: the first available model is used. Skills and instruction files cannot se
 | ------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------- |
 | 1 Quick | Quick Helper                                                                             | GPT-6 Luna, GPT-5.6 Luna, Claude Haiku 4.5         | One-file edits, syntax, regex, short answers      |
 | 2 Plan  | Planner, reviewers, advisors, Unity Architect, Unity Performance Auditor, Unity Reviewer | Claude Sonnet 5.5, Sonnet 5, GPT-5.6 Terra         | Architecture, multi-file design, read-only review |
-| 3 Act   | Implementer, scaffolders, Unity Developer                                                | GPT-6.1 Sol, GPT-6 Sol, GPT-5.6 Sol, GPT-5.6 Terra | Multi-file edits with build and test loops        |
+| 3 Act   | Implementer, scaffolders, Unity Developer, Unity UITK Editor Tools                       | GPT-6.1 Sol, GPT-6 Sol, GPT-5.6 Sol, GPT-5.6 Terra | Multi-file edits with build and test loops        |
 | 4 Deep  | Deep Researcher                                                                          | Claude Opus 5.5, Opus 5, Opus 4.8                  | Root cause, races, migrations, trade-off research |
 
 Unity agents are supplied by the optional `unity/` bundle. They preserve 2D/3D/package context and

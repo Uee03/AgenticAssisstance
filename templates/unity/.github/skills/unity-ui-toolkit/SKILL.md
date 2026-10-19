@@ -1,6 +1,6 @@
 ---
 name: unity-ui-toolkit
-description: "Build and review Unity UI Toolkit UXML/USS, runtime and Editor UI, custom controls, data binding, ListView virtualization, MVP/MVVM, R3 state, and LitMotion transitions. Use for UI lifecycle, focus, performance, or responsive layout."
+description: "Design and review runtime Unity UI Toolkit screens: UIDocument ownership, MVP/MVVM presenters, R3 state, LitMotion transitions, ListView virtualization, focus and gamepad navigation, and responsive layout. Use for in-game UI architecture and lifecycle; for Editor tools, USS, controls or binding details use the unity-uitk-* skills."
 ---
 
 # Unity UI Toolkit
@@ -39,5 +39,6 @@ description: "Build and review Unity UI Toolkit UXML/USS, runtime and Editor UI,
 - [ListView API](https://docs.unity3d.com/ScriptReference/UIElements.ListView.html)
 - [MVP](../unity-design-patterns/reference/mvp.md)
 - [MVVM](../unity-design-patterns/reference/mvvm.md)
+- Editor UI, USS, controls and binding details: [unity-uitk-uss-style-system](../unity-uitk-uss-style-system/SKILL.md), [unity-uitk-custom-controls](../unity-uitk-custom-controls/SKILL.md), [unity-uitk-data-binding](../unity-uitk-data-binding/SKILL.md), [unity-uitk-performance-review](../unity-uitk-performance-review/SKILL.md)
 - [R3](https://github.com/Cysharp/R3)
 - [LitMotion](https://github.com/annulusgames/LitMotion)

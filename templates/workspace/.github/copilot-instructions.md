@@ -9,9 +9,10 @@ command) that matches the task, or use **Orchestrator** to route automatically.
 | Architecture, multi-file design, review layout | Planner `/plan` | balanced, read-only |
 | Execute an approved plan across files | Implementer `/act` | strong coder, edits + tests |
 | Hard bug, race condition, migration, trade-off research | Deep Researcher `/deep-research` | deep reasoning, read-only |
+| Create, fix, or optimize an SVG (icon, logo, illustration, sprite) | SVG Designer | edits + tests, Act tier |
 
 Skills: `model-routing`, `planning-projects`, `researching-ideas`, `modeling-uml`, `writing-mermaid`,
-`designing-diagrams` (draw.io). Guide: `docs/ai-workflow.md`.
+`designing-diagrams` (draw.io), `authoring-svg`. Guide: `docs/ai-workflow.md`.
 
 ## Rules
 

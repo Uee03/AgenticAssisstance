@@ -8,8 +8,9 @@ instructions), `.vscode/extensions.json`, and this guide.
 
 1. Copy the bundle contents into the project root (merge `.vscode/extensions.json` if one exists).
 2. Install the recommended extensions: draw.io (`hediet.vscode-drawio`) and Markdown Mermaid.
-3. Open Chat. Check the Agent dropdown lists Quick Helper, Planner, Implementer, Deep Researcher, and
-   Orchestrator. If one is missing, right-click the Chat view, choose Diagnostics, and read the errors.
+3. Open Chat. Check the Agent dropdown lists Quick Helper, Planner, Implementer, Deep Researcher,
+   SVG Designer, and Orchestrator. If one is missing, right-click the Chat view, choose Diagnostics,
+   and read the errors.
 4. Model names are pinned in each `.agent.md` (`model:`). If a name does not match your plan, the
    next one in the list is used. See the `model-routing` skill to change them.
 
@@ -21,6 +22,7 @@ instructions), `.vscode/extensions.json`, and this guide.
 | Plan a project or feature, compare options, review a design | `/plan` | Claude Sonnet 5.5 (Sonnet 5, GPT-5.6 Terra) |
 | Implement a multi-file change, scaffold a project, run build and tests | `/act` | GPT-6.1 Sol (GPT-6 Sol, GPT-5.6 Sol, GPT-5.6 Terra) |
 | Investigate an unknown root cause, hard trade-off, migration, or repeated failure | `/deep-research` | Claude Opus 5.5 (Opus 5, Opus 4.8) |
+| Create, fix, or optimize an SVG icon, logo, illustration, or sprite | SVG Designer | GPT-6.1 Sol (GPT-6 Sol, GPT-5.6 Sol, GPT-5.6 Terra) |
 | Unsure which workflow to use, or want plan-then-build routed for you | Orchestrator | Routes between the configured agents |
 
 The model in parentheses is the configured fallback order if the preferred model is unavailable.
@@ -42,11 +44,14 @@ prompt (`use the writing-mermaid skill`) or run it as a slash command (`/plannin
 | `modeling-uml` | "Reverse-engineer a class diagram of the Billing domain from `#file:src/Billing.Domain/Invoice.cs` and its neighbors. Public members only." |
 | `writing-mermaid` | "Mermaid sequence diagram for login with refresh token: browser, API, auth service, database. Put it in `docs/auth.md`." |
 | `designing-diagrams` | "Make a draw.io container diagram of the whole system for new developers: web, mobile, API, worker, Postgres, S3. Save to `docs/diagrams/system.drawio`." |
+| `authoring-svg` | "Draw a 24x24 inline SVG bell icon that uses currentColor and is accessible; then give me the SVGO-optimized version." |
 | `model-routing` | "Which model should I use to migrate 40 files from Moment to date-fns?" |
 
 Choosing between the diagram skills: Mermaid for quick, versioned diagrams inside Markdown (sequence,
 state, ER, small flows); draw.io for polished, editable architecture and class diagrams; `modeling-uml`
-when you need the right UML type and notation, drawn in either.
+when you need the right UML type and notation, drawn in either. For hand-written vector graphics -
+icons, logos, illustrations, sprites, and CSS/SMIL animations - use `authoring-svg` (the SVG Designer
+agent pairs with it).
 
 ## How to prompt well
 
@@ -118,6 +123,9 @@ saved in docs/domain.md.
 - **Evaluate an idea:** `researching-ideas`; if the answer is close or high-stakes, rerun with `/deep-research`.
 - **Hard bug:** reproduce, `/deep-research`, `/plan` the fix, `/act`.
 - **Document a system:** `modeling-uml` for structure, `writing-mermaid` for flows, `designing-diagrams` for the big picture.
+- **Icons and logos:** use the SVG Designer (or `authoring-svg`) to draw an inline, `currentColor`,
+  accessible SVG, then ship it optimized; for a whole icon set, `/plan` the artboard size, naming,
+  and sprite strategy first.
 
 ## Troubleshooting
 
